@@ -4,6 +4,62 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --font-display: "Anton", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --bg: #080808;
+  --surface: #0f0f0f;
+  --fg: #f2f2f2;
+  --muted: #737373;
+  --accent: #fbbf24;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float-3d {
+  0%, 100% { transform: translateY(0) rotateX(10deg) rotateY(10deg); }
+  50% { transform: translateY(-20px) rotateX(-10deg) rotateY(-10deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.marquee-track { animation: marquee 22s linear infinite; }
+.float-3d { animation: float-3d 6s infinite ease-in-out; }
+.fade-up { animation: fade-up 1s var(--ease-out-expo) both; }
+
+.specimen-glow {
+  background: radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 70%);
+  opacity: 0.15;
+}
+
+.noise::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html { background: var(--bg); color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); }
+::selection { background: var(--accent); color: var(--bg); }
+
 /*
  * Design system definition.
  *
