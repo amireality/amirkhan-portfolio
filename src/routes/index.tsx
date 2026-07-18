@@ -146,7 +146,7 @@ function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pt-32 md:px-20">
       <div className="specimen-glow absolute inset-0 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-8%] top-1/2 hidden h-[80vh] w-[60vw] -translate-y-1/2 lg:block">
+      <div className="pointer-events-none absolute inset-x-0 top-[12%] mx-auto h-[55vh] w-[95vw] opacity-70 sm:opacity-90 md:right-[-4%] md:left-auto md:top-1/2 md:mx-0 md:h-[70vh] md:w-[70vw] md:-translate-y-1/2 md:opacity-100 lg:h-[80vh] lg:w-[60vw]">
         <Suspense fallback={null}>
           <Hero3D />
         </Suspense>
