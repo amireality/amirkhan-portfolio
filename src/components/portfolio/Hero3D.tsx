@@ -1,11 +1,17 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Icosahedron, MeshDistortMaterial, Environment } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
-import type { Mesh } from "three";
+import { useTexture } from "@react-three/drei";
+import { useEffect, useRef, useState, Suspense } from "react";
+import { AdditiveBlending, BackSide, type Group, type Mesh } from "three";
 
-function Specimen() {
-  const ref = useRef<Mesh>(null);
+const EARTH_TEXTURE_URL =
+  "https://unpkg.com/three-globe@2.31.1/example/img/earth-dark.jpg";
+
+function Globe() {
+  const group = useRef<Group>(null);
+  const earth = useRef<Mesh>(null);
   const mouse = useRef({ x: 0, y: 0 });
+  const texture = useTexture(EARTH_TEXTURE_URL);
+
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -14,28 +20,63 @@ function Specimen() {
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
+
   useFrame((_, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.x += delta * 0.15 + mouse.current.y * 0.02;
-    ref.current.rotation.y += delta * 0.2 + mouse.current.x * 0.02;
+    if (earth.current) {
+      earth.current.rotation.y += delta * 0.12;
+    }
+    if (group.current) {
+      const targetX = mouse.current.y * 0.35;
+      const targetY = mouse.current.x * 0.5;
+      group.current.rotation.x += (targetX - group.current.rotation.x) * 0.05;
+      group.current.rotation.y += (targetY - group.current.rotation.y) * 0.05;
+    }
   });
+
   return (
-    <Float speed={1.3} rotationIntensity={0.6} floatIntensity={1.4}>
-      <Icosahedron ref={ref} args={[1.6, 4]}>
-        <MeshDistortMaterial
-          color="#fbbf24"
-          emissive="#7a4a00"
-          emissiveIntensity={0.35}
-          roughness={0.15}
-          metalness={0.85}
-          distort={0.42}
-          speed={1.6}
+    <group ref={group}>
+      {/* Earth sphere — grayscale texture */}
+      <mesh ref={earth}>
+        <sphereGeometry args={[1.6, 64, 64]} />
+        <meshStandardMaterial
+          map={texture}
+          color="#ffffff"
+          emissive="#1a1a1a"
+          emissiveIntensity={0.4}
+          roughness={0.8}
+          metalness={0.1}
         />
-      </Icosahedron>
-      <Icosahedron args={[2.2, 1]}>
-        <meshBasicMaterial color="#fbbf24" wireframe transparent opacity={0.12} />
-      </Icosahedron>
-    </Float>
+      </mesh>
+      {/* Wireframe shell */}
+      <mesh>
+        <sphereGeometry args={[1.615, 48, 48]} />
+        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.08} />
+      </mesh>
+      {/* Inner glow atmosphere */}
+      <mesh scale={1.08}>
+        <sphereGeometry args={[1.6, 48, 48]} />
+        <meshBasicMaterial
+          color="#ffffff"
+          transparent
+          opacity={0.12}
+          side={BackSide}
+          blending={AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+      {/* Outer glow atmosphere */}
+      <mesh scale={1.22}>
+        <sphereGeometry args={[1.6, 48, 48]} />
+        <meshBasicMaterial
+          color="#ffffff"
+          transparent
+          opacity={0.06}
+          side={BackSide}
+          blending={AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+    </group>
   );
 }
 
@@ -50,11 +91,13 @@ export function Hero3D() {
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[3, 3, 5]} intensity={1.6} color="#fbbf24" />
-      <directionalLight position={[-4, -2, -3]} intensity={0.6} color="#ffffff" />
-      <Specimen />
-      <Environment preset="city" />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[5, 3, 5]} intensity={1.8} color="#ffffff" />
+      <directionalLight position={[-4, -2, -3]} intensity={0.4} color="#ffffff" />
+      <pointLight position={[0, 0, 4]} intensity={0.6} color="#ffffff" />
+      <Suspense fallback={null}>
+        <Globe />
+      </Suspense>
     </Canvas>
   );
 }
