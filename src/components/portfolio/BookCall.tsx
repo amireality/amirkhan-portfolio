@@ -120,7 +120,7 @@ export function BookCall() {
                     Fee
                   </div>
                   <div className="mt-2 font-display text-6xl uppercase">
-                    ₹2,500 <span className="text-lg text-muted">INR</span>
+                    ₹149 <span className="text-lg text-muted">INR</span>
                   </div>
                   <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted">
                     Secured by Razorpay · UPI · Cards · Netbanking

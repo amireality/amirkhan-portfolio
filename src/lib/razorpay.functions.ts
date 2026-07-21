@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-const AMOUNT_INR = 2500; // ₹2,500 discovery call fee
+const AMOUNT_INR = 149; // ₹149 discovery call fee
 
 export const createDiscoveryOrder = createServerFn({ method: "POST" }).handler(
   async () => {
