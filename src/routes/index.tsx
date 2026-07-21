@@ -42,7 +42,7 @@ const ventures = [
     idx: "04",
     kind: "Advisory",
     name: "Consulting",
-    body: "Sales process, ICP work and outreach tooling for advisory clients — including a strategic firm doing forensic accounting and M&A. Turning senior expertise into a repeatable pipeline.",
+    body: "Sales process, ICP work and outreach tooling for advisory clients, including a strategic firm doing forensic accounting and M&A. Turning senior expertise into a repeatable pipeline.",
     tags: ["Sales Ops", "ICP", "Outreach"],
     status: "ONGOING",
   },
@@ -51,10 +51,10 @@ const ventures = [
 const services = [
   { n: "01", t: "Business Setup Consulting", d: "Entity, banking, ops stack, the whole first-90-days sprint that most founders lose to admin." },
   { n: "02", t: "Brand Identity", d: "Naming, positioning, mark, type system, launch collateral. Brands built to be scaled, not just launched." },
-  { n: "03", t: "Digital Presence", d: "Sites, landing pages, content OS. What people find when they Google you — designed on purpose." },
+  { n: "03", t: "Digital Presence", d: "Sites, landing pages, content OS. What people find when they Google you, designed on purpose." },
   { n: "04", t: "Cloud Infrastructure", d: "AWS / Cloudflare / edge. Sensible defaults, real observability, invoices you can explain." },
   { n: "05", t: "Sales Process & GTM", d: "ICP, message-market fit, outbound systems. Structuring how you sell so it's not just the founder closing every deal." },
-  { n: "06", t: "AI-Assisted Builds", d: "End-to-end web products shipped through vibecoding — from prompt to production on real infra." },
+  { n: "06", t: "AI-Assisted Builds", d: "End-to-end web products shipped through vibecoding, from prompt to production on real infra." },
 ];
 
 const sites = [
@@ -69,7 +69,7 @@ const sites = [
 const processSteps = [
   { n: "01", t: "Vibe Check", d: "We align on what the thing wants to feel like before I touch a prompt or a Figma frame." },
   { n: "02", t: "Architecture", d: "I map data, surfaces, and the shortest path from user intent to shipped value." },
-  { n: "03", t: "Prompt & Ship", d: "AI-assisted build cycles — daily deployable increments, no month-long silences." },
+  { n: "03", t: "Prompt & Ship", d: "AI-assisted build cycles, daily deployable increments, no month-long silences." },
   { n: "04", t: "Operate", d: "Once it's live it's a system, not a project. Analytics, iteration, ownership handoff." },
 ];
 
@@ -80,9 +80,9 @@ const tools = [
 ];
 
 const writing = [
-  { tag: "LinkedIn", title: "Why 'vibecoding' isn't a shortcut — it's a discipline", excerpt: "The people scoffing at AI-assisted development are the same people who scoffed at Squarespace in 2013." },
+  { tag: "LinkedIn", title: "Why 'vibecoding' isn't a shortcut, it's a discipline", excerpt: "The people scoffing at AI-assisted development are the same people who scoffed at Squarespace in 2013." },
   { tag: "Blog", title: "The first 90 days of any Indian SMB", excerpt: "A working checklist from GST to Google Workspace, written from the receipts of doing it dozens of times." },
-  { tag: "LinkedIn", title: "Your ICP is a person, not a segment", excerpt: "If you can't name three actual humans that match it, you don't have an ICP — you have a slide." },
+  { tag: "LinkedIn", title: "Your ICP is a person, not a segment", excerpt: "If you can't name three actual humans that match it, you don't have an ICP, you have a slide." },
 ];
 
 function Index() {
@@ -165,12 +165,12 @@ function Hero() {
         />
         <div className="mt-6 flex flex-col justify-between gap-6 md:mt-8 md:flex-row md:items-end">
           <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.6s" }}>
-            I build brands, cloud infrastructure, and AI-native systems — end to end,{" "}
+            I build brands, cloud infrastructure, and AI-native systems, end to end,{" "}
             <span className="text-accent">through AI-assisted prompting</span>, from a workshop in Jaipur.
           </p>
           <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.9s" }}>
             <div>[LAT / LON] 26.9124° N, 75.7873° E</div>
-            <div>[STATUS] Taking on new work — Q1</div>
+            <div>[STATUS] Taking on new work, Q1</div>
             <div>[LAST SHIP] 4 hours ago</div>
           </div>
         </div>
@@ -226,7 +226,7 @@ function About() {
       <div className="max-w-2xl space-y-6 text-lg leading-relaxed text-muted md:col-span-8">
         <Reveal delay={0.05}>
           <p className="text-fg">
-            I don't fit in a single lane, and after ten years of trying I've stopped pretending I should. My path runs from the technical precision of cloud infrastructure to the tactile world of D2C ethnic apparel — and every stop in between.
+            I don't fit in a single lane, and after ten years of trying I've stopped pretending I should. My path runs from the technical precision of cloud infrastructure to the tactile world of D2C ethnic apparel, and every stop in between.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -236,7 +236,7 @@ function About() {
         </Reveal>
         <Reveal delay={0.15}>
           <p>
-            I call myself a <span className="italic text-fg">vibecoder</span>. That's not a shortcut — it's a discipline. I build through AI-assisted prompting instead of hand-coding line by line, which means I spend my time on architecture, taste, and outcomes rather than on syntax. Same jump front-end got when it stopped being &ldquo;write CSS by hand&rdquo; and became &ldquo;compose from a design system.&rdquo;
+            I call myself a <span className="italic text-fg">vibecoder</span>. That's not a shortcut, it's a discipline. I build through AI-assisted prompting instead of hand-coding line by line, which means I spend my time on architecture, taste, and outcomes rather than on syntax. Same jump front-end got when it stopped being &ldquo;write CSS by hand&rdquo; and became &ldquo;compose from a design system.&rdquo;
           </p>
         </Reveal>
         <Reveal delay={0.2}>
@@ -336,7 +336,7 @@ function Sites() {
           <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">[04] Web Archive</p>
           <h2 className="font-display text-5xl uppercase md:text-6xl">Sites I&rsquo;ve built</h2>
           <p className="mt-4 max-w-md text-pretty text-muted">
-            End-to-end web builds shipped through AI-assisted prompting. Placeholder previews — swap in real screenshots and links.
+            End-to-end web builds shipped through AI-assisted prompting. Placeholder previews, swap in real screenshots and links.
           </p>
         </Reveal>
         <span className="font-mono text-[10px] uppercase tracking-widest text-muted">{sites.length} shipped</span>
@@ -556,7 +556,7 @@ function Footer() {
             <a href="#" className="hover:text-accent">Github</a>
             <a href="#" className="hover:text-accent">Email</a>
           </div>
-          <div>© {new Date().getFullYear()} — All systems nominal</div>
+          <div>© {new Date().getFullYear()}, All systems nominal</div>
           <div className="text-fg/40">Designed for the late-night console.</div>
         </div>
       </div>

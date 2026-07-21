@@ -21,7 +21,7 @@ export const createDiscoveryOrder = createServerFn({ method: "POST" }).handler(
         amount: AMOUNT_INR * 100,
         currency: "INR",
         receipt: `disc_${Date.now()}`,
-        notes: { purpose: "Discovery call — Amir Khan" },
+        notes: { purpose: "Discovery call, Amir Khan" },
       }),
     });
     if (!res.ok) {
