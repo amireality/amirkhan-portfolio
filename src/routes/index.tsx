@@ -109,12 +109,21 @@ function Index() {
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 40);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+  const links = [
+    { href: "#about", label: "Narrative" },
+    { href: "#work", label: "Work" },
+    { href: "#sites", label: "Sites" },
+    { href: "#writing", label: "Writing" },
+    { href: "#book", label: "Book Call" },
+    { href: "#contact", label: "Contact" },
+  ];
   return (
     <nav
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -127,19 +136,46 @@ function Nav() {
           <span className="font-mono text-xs uppercase tracking-[0.2em]">AK / 407</span>
         </a>
         <div className="hidden gap-8 font-mono text-[10px] uppercase tracking-[0.25em] text-muted md:flex">
-          <a href="#about" className="transition-colors hover:text-fg">Narrative</a>
-          <a href="#work" className="transition-colors hover:text-fg">Work</a>
-          <a href="#sites" className="transition-colors hover:text-fg">Sites</a>
-          <a href="#writing" className="transition-colors hover:text-fg">Writing</a>
-          <a href="#book" className="transition-colors hover:text-fg">Book Call</a>
-          <a href="#contact" className="transition-colors hover:text-fg">Contact</a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="transition-colors hover:text-fg">{l.label}</a>
+          ))}
         </div>
-        <a
-          href="#contact"
-          className="border border-accent/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-accent transition-all hover:bg-accent hover:text-bg"
-        >
-          Initiate
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="#contact"
+            className="border border-accent/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-accent transition-all hover:bg-accent hover:text-bg"
+          >
+            Initiate
+          </a>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex size-9 flex-col items-center justify-center gap-1.5 border border-border md:hidden"
+          >
+            <span className={`h-px w-4 bg-fg transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
+            <span className={`h-px w-4 bg-fg transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
+          </button>
+        </div>
+      </div>
+      <div
+        className={`overflow-hidden border-t border-border bg-bg/95 backdrop-blur-md transition-[max-height] duration-300 md:hidden ${
+          open ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        <div className="flex flex-col px-6 py-4">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="border-b border-border/50 py-3 font-mono text-[11px] uppercase tracking-[0.25em] text-muted hover:text-accent"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );
