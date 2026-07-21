@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState, type FormEvent, type ReactNode } f
 import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
 import { Reveal, SplitHeading } from "@/components/portfolio/Reveal";
 import { MagneticButton } from "@/components/portfolio/MagneticButton";
+import { BookCall } from "@/components/portfolio/BookCall";
 
 const Hero3D = lazy(() =>
   import("@/components/portfolio/Hero3D").then((m) => ({ default: m.Hero3D })),
@@ -99,6 +100,7 @@ function Index() {
       <Process />
       <ToolsSection />
       <Writing />
+      <BookCall />
       <Contact />
       <Footer />
     </div>
@@ -129,6 +131,7 @@ function Nav() {
           <a href="#work" className="transition-colors hover:text-fg">Work</a>
           <a href="#sites" className="transition-colors hover:text-fg">Sites</a>
           <a href="#writing" className="transition-colors hover:text-fg">Writing</a>
+          <a href="#book" className="transition-colors hover:text-fg">Book Call</a>
           <a href="#contact" className="transition-colors hover:text-fg">Contact</a>
         </div>
         <a
@@ -144,7 +147,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pt-32 md:px-20">
+    <section id="top" className="relative flex min-h-[calc(100svh-3.5rem)] flex-col justify-center overflow-hidden px-6 pb-16 pt-24 md:min-h-[calc(100svh-4rem)] md:px-20 md:pt-28">
       <div className="specimen-glow absolute inset-0 blur-3xl" />
       <div className="pointer-events-none absolute inset-x-0 top-[12%] mx-auto h-[55vh] w-[95vw] opacity-70 sm:opacity-90 md:right-[-4%] md:left-auto md:top-1/2 md:mx-0 md:h-[70vh] md:w-[70vw] md:-translate-y-1/2 md:opacity-100 lg:h-[80vh] lg:w-[60vw]">
         <Suspense fallback={null}>
@@ -179,10 +182,10 @@ function Hero() {
             See the work
           </MagneticButton>
           <MagneticButton
-            href="#contact"
+            href="#book"
             className="border border-border px-8 py-4 font-display text-lg uppercase tracking-widest text-fg hover:border-accent"
           >
-            Start a project
+            Book a call
           </MagneticButton>
         </div>
       </div>
