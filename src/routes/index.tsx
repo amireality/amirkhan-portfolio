@@ -365,7 +365,7 @@ function Services() {
                 <span className="font-mono text-[10px] text-muted">{s.n}</span>
                 <span className="size-2 rounded-full bg-border transition-colors group-hover:bg-accent" />
               </div>
-              <h3 className="mb-3 font-display text-3xl uppercase">WEBSITE</h3>
+              <h3 className="mb-3 font-display text-3xl uppercase">{s.t}</h3>
               <p className="text-sm leading-relaxed text-muted">{s.d}</p>
             </div>
           </Reveal>
