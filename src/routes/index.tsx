@@ -258,7 +258,7 @@ function HeroInner() {
       <div className="relative z-10">
         <div className="fade-up mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
           <span className="size-2 bg-accent" />
-          <span>Founder · Operator · Vibecoder · Jaipur, IN</span>
+          <span>FOUNDER · OPERATOR · VIBECODER · IN</span>
         </div>
         <SplitHeading
           text="Amir Khan"
@@ -266,8 +266,8 @@ function HeroInner() {
         />
         <div className="mt-6 flex flex-col justify-between gap-6 md:mt-8 md:flex-row md:items-end">
           <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.6s" }}>
-            I build brands, cloud infrastructure, and AI-native systems, end to end,{" "}
-            <span className="text-accent">through AI-assisted prompting</span>, from a workshop in Jaipur.
+            I build brands, websites, and AI-native systems, end to end,{" "}
+            <span className="text-accent">through AI-assisted prompting</span>.
           </p>
           <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.9s" }}>
             <NodeTicker />
@@ -327,17 +327,17 @@ function About() {
       <div className="max-w-2xl space-y-6 text-lg leading-relaxed text-muted md:col-span-8">
         <Reveal delay={0.05}>
           <p className="text-fg">
-            I don't fit in a single lane, and after ten years of trying I've stopped pretending I should. My path runs from the technical precision of cloud infrastructure to the tactile world of D2C ethnic apparel, and every stop in between.
+            I don't fit in a single lane, and after years of trying I've stopped pretending I should. My path runs from shipping a founder's first website to the harder, messier work of fixing what's underneath it, and every stop in between.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
           <p>
-            Setupr is the through-line: an agency that helps Indian founders and SMBs stop losing months to setup admin and start shipping. Alongside it I run <span className="text-fg">Altered</span>, a pre-launch women's urban ethnic apparel brand, and <span className="text-fg">Alt</span>, an on-premise LLM project for teams that can't send their data to someone else's cloud.
+            I call myself a&nbsp;vibecoder. That's not a shortcut, it's a discipline. I build through AI-assisted prompting instead of hand-coding line by line, which means I spend my time on architecture, taste, and outcomes rather than on syntax. Same jump front-end got when it stopped being “write CSS by hand” and became “compose from a design system.”
           </p>
         </Reveal>
         <Reveal delay={0.15}>
           <p>
-            I call myself a <span className="italic text-fg">vibecoder</span>. That's not a shortcut, it's a discipline. I build through AI-assisted prompting instead of hand-coding line by line, which means I spend my time on architecture, taste, and outcomes rather than on syntax. Same jump front-end got when it stopped being &ldquo;write CSS by hand&rdquo; and became &ldquo;compose from a design system.&rdquo;
+            Setupr is the through-line: an agency that builds founders their first real digital presence, sites, custom tools, and the AI automations that used to take a whole team. Alongside it I run Altered, a pre-launch women's urban ethnic apparel brand.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
@@ -365,7 +365,7 @@ function Services() {
                 <span className="font-mono text-[10px] text-muted">{s.n}</span>
                 <span className="size-2 rounded-full bg-border transition-colors group-hover:bg-accent" />
               </div>
-              <h3 className="mb-3 font-display text-3xl uppercase">{s.t}</h3>
+              <h3 className="mb-3 font-display text-3xl uppercase">WEBSITE</h3>
               <p className="text-sm leading-relaxed text-muted">{s.d}</p>
             </div>
           </Reveal>
@@ -489,10 +489,10 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 
 function Stats() {
   const stats = [
-    { label: "Clients served", value: 42, suffix: "+" },
-    { label: "Sites shipped", value: 60, suffix: "+" },
+    { label: "Clients served", value: 10, suffix: "+" },
+    { label: "Sites shipped", value: 11, suffix: "+" },
     { label: "Active ventures", value: 4, suffix: "" },
-    { label: "Years operating", value: 8, suffix: "" },
+    { label: "Years operating", value: 5, suffix: "" },
   ];
   return (
     <section className="grid grid-cols-2 gap-px border-y border-border bg-border md:grid-cols-4">
@@ -647,7 +647,7 @@ function Footer() {
             Amir Khan <span className="text-accent">//</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted">
-            Founder of Setupr. Building brands, cloud infrastructure, and AI-native systems from Jaipur, India.
+            Founder of Setupr. Building brands, websites, and AI-native systems.
           </p>
         </div>
         <div className="flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:items-end">
