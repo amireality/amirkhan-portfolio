@@ -118,7 +118,7 @@ function Globe() {
 
   return (
     <group ref={group}>
-      {/* Earth sphere — grayscale, self-lit continents for visibility */}
+      {/* Earth sphere, grayscale, self-lit continents for visibility */}
       <mesh ref={earth}>
         <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
         <meshStandardMaterial
@@ -135,7 +135,7 @@ function Globe() {
           <CityMarker key={i} position={c.position} phase={c.phase} />
         ))}
       </mesh>
-      {/* Cloud layer — grey, slightly faster rotation */}
+      {/* Cloud layer, grey, slightly faster rotation */}
       <mesh ref={clouds}>
         <sphereGeometry args={[GLOBE_RADIUS * 1.015, 64, 64]} />
         <meshStandardMaterial

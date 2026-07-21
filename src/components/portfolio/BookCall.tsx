@@ -69,7 +69,7 @@ export function BookCall() {
         currency: order.currency,
         order_id: order.orderId,
         name: "Amir Khan · Discovery Call",
-        description: "30-min working call — fee credited if we work together.",
+        description: "30-min working call, fee credited if we work together.",
         theme: { color: "#fbbf24" },
         handler: async (r) => {
           const { ok } = await verifyPayment({
@@ -144,7 +144,7 @@ export function BookCall() {
           <Reveal>
             <div className="border border-accent/30 bg-accent/[0.03] p-6">
               <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                Payment received — pick a slot
+                Payment received, pick a slot
               </p>
               <div
                 className="calendly-inline-widget"
