@@ -205,7 +205,7 @@ function Hero() {
             <span className="text-accent">through AI-assisted prompting</span>, from a workshop in Jaipur.
           </p>
           <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.9s" }}>
-            <div>[LAT / LON] 26.9124° N, 75.7873° E</div>
+            <NodeTicker />
             <div>[STATUS] Taking on new work, Q1</div>
             <div>[LAST SHIP] 4 hours ago</div>
           </div>
