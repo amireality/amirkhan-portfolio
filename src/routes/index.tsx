@@ -182,6 +182,71 @@ function Nav() {
 }
 
 function Hero() {
+  return HeroInner();
+}
+
+const NODES = [
+  { coord: "28.6139° N, 77.2090° E", code: "DEL" },
+  { coord: "19.0760° N, 72.8777° E", code: "BOM" },
+  { coord: "12.9716° N, 77.5946° E", code: "BLR" },
+  { coord: "25.2048° N, 55.2708° E", code: "DXB" },
+  { coord: "1.3521° N, 103.8198° E", code: "SIN" },
+  { coord: "51.5072° N, 0.1276° W", code: "LDN" },
+];
+
+const SCRAMBLE_CHARS = "0123456789°.NEWS";
+
+function scramble(target: string) {
+  let out = "";
+  for (let i = 0; i < target.length; i++) {
+    const ch = target[i];
+    if (ch === " " || ch === "," || ch === "°") out += ch;
+    else out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+  }
+  return out;
+}
+
+function NodeTicker() {
+  const [idx, setIdx] = useState(0);
+  const [display, setDisplay] = useState(NODES[0].coord);
+  const [code, setCode] = useState(NODES[0].code);
+  useEffect(() => {
+    let cancelled = false;
+    let scrambleTimer: ReturnType<typeof setInterval> | null = null;
+    const cycle = setInterval(() => {
+      const next = (idx + 1) % NODES.length;
+      const target = NODES[next].coord;
+      let ticks = 0;
+      const maxTicks = 10;
+      scrambleTimer = setInterval(() => {
+        if (cancelled) return;
+        ticks++;
+        if (ticks >= maxTicks) {
+          if (scrambleTimer) clearInterval(scrambleTimer);
+          setDisplay(target);
+          setCode(NODES[next].code);
+          setIdx(next);
+        } else {
+          const reveal = Math.floor((ticks / maxTicks) * target.length);
+          setDisplay(target.slice(0, reveal) + scramble(target.slice(reveal)));
+        }
+      }, 40);
+    }, 2500);
+    return () => {
+      cancelled = true;
+      clearInterval(cycle);
+      if (scrambleTimer) clearInterval(scrambleTimer);
+    };
+  }, [idx]);
+  return (
+    <div>
+      [NODE] <span className="text-fg">{display}</span>
+      <span className="ml-2 text-accent">// {code}</span>
+    </div>
+  );
+}
+
+function HeroInner() {
   return (
     <section id="top" className="relative flex min-h-[calc(100svh-8rem)] flex-col justify-center overflow-hidden px-6 pb-8 pt-20 md:min-h-[calc(100svh-9rem)] md:px-20 md:pt-24">
       <div className="specimen-glow absolute inset-0 blur-3xl" />
