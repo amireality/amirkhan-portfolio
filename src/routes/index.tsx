@@ -147,7 +147,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-[calc(100svh-3.5rem)] flex-col justify-center overflow-hidden px-6 pb-16 pt-24 md:min-h-[calc(100svh-4rem)] md:px-20 md:pt-28">
+    <section id="top" className="relative flex min-h-[calc(100svh-8rem)] flex-col justify-center overflow-hidden px-6 pb-8 pt-20 md:min-h-[calc(100svh-9rem)] md:px-20 md:pt-24">
       <div className="specimen-glow absolute inset-0 blur-3xl" />
       <div className="pointer-events-none absolute inset-x-0 top-[12%] mx-auto h-[55vh] w-[95vw] opacity-70 sm:opacity-90 md:right-[-4%] md:left-auto md:top-1/2 md:mx-0 md:h-[70vh] md:w-[70vw] md:-translate-y-1/2 md:opacity-100 lg:h-[80vh] lg:w-[60vw]">
         <Suspense fallback={null}>
@@ -161,10 +161,10 @@ function Hero() {
         </div>
         <SplitHeading
           text="Amir Khan"
-          className="font-display text-[18vw] leading-[0.85] uppercase tracking-tight md:text-[15vw]"
+          className="font-display text-[15vw] leading-[0.85] uppercase tracking-tight md:text-[11vw]"
         />
-        <div className="mt-12 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <p className="fade-up max-w-xl text-pretty text-xl font-light leading-relaxed text-fg/90 md:text-2xl" style={{ animationDelay: "0.6s" }}>
+        <div className="mt-6 flex flex-col justify-between gap-6 md:mt-8 md:flex-row md:items-end">
+          <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.6s" }}>
             I build brands, cloud infrastructure, and AI-native systems — end to end,{" "}
             <span className="text-accent">through AI-assisted prompting</span>, from a workshop in Jaipur.
           </p>
@@ -174,22 +174,22 @@ function Hero() {
             <div>[LAST SHIP] 4 hours ago</div>
           </div>
         </div>
-        <div className="fade-up mt-16 flex flex-wrap gap-6" style={{ animationDelay: "1.1s" }}>
+        <div className="fade-up mt-8 flex flex-wrap gap-4 md:mt-10" style={{ animationDelay: "1.1s" }}>
           <MagneticButton
             href="#work"
-            className="bg-accent px-8 py-4 font-display text-lg uppercase tracking-widest text-bg"
+            className="bg-accent px-6 py-3 font-display text-base uppercase tracking-widest text-bg md:px-8 md:py-4 md:text-lg"
           >
             See the work
           </MagneticButton>
           <MagneticButton
             href="#book"
-            className="border border-border px-8 py-4 font-display text-lg uppercase tracking-widest text-fg hover:border-accent"
+            className="border border-border px-6 py-3 font-display text-base uppercase tracking-widest text-fg hover:border-accent md:px-8 md:py-4 md:text-lg"
           >
             Book a call
           </MagneticButton>
         </div>
       </div>
-      <div className="pointer-events-none absolute bottom-8 left-6 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:left-20">
+      <div className="pointer-events-none absolute bottom-3 left-6 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:left-20">
         Scroll ↓ to enter
       </div>
     </section>
