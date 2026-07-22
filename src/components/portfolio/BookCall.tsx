@@ -46,10 +46,16 @@ export function BookCall() {
   const [status, setStatus] = useState<"idle" | "loading" | "paid" | "error">("idle");
   const [bookingUrl, setBookingUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [devSkip, setDevSkip] = useState(false);
   const calendlyRef = useRef<HTMLDivElement | null>(null);
   const createOrder = useServerFn(createDiscoveryOrder);
   const verifyPayment = useServerFn(verifyDiscoveryPayment);
   const createSchedulingLink = useServerFn(createDiscoverySchedulingLink);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setDevSkip(new URLSearchParams(window.location.search).has("devskip"));
+  }, []);
 
   useEffect(() => {
     if (status !== "paid" || !bookingUrl || !calendlyRef.current) return;
@@ -118,6 +124,20 @@ export function BookCall() {
     }
   };
 
+  const onDevSkip = async () => {
+    setError(null);
+    setStatus("loading");
+    try {
+      const link = await createSchedulingLink();
+      setBookingUrl(link.bookingUrl);
+      setStatus("paid");
+    } catch (e) {
+      console.error(e);
+      setError(e instanceof Error ? e.message : "Calendly booking link could not be created");
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="book" className="border-t border-border px-6 py-32 md:px-20">
       <div className="mx-auto max-w-4xl">
@@ -156,6 +176,19 @@ export function BookCall() {
                   {status === "loading" ? "Opening..." : "Pay & book slot"}
                 </MagneticButton>
               </div>
+              {devSkip && (
+                <div className="mt-6 flex items-center justify-between border border-accent/30 bg-accent/[0.04] px-4 py-3">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                    Dev bypass active
+                  </span>
+                  <button
+                    onClick={onDevSkip}
+                    className="font-mono text-[10px] uppercase tracking-widest text-accent underline underline-offset-4"
+                  >
+                    Skip payment, load Calendly
+                  </button>
+                </div>
+              )}
               {error && (
                 <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-accent">
                   {error}
