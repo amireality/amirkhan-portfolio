@@ -22,17 +22,17 @@ type CalendlySchedulingLinkResponse = {
   };
 };
 
-async function readJson<T>(response: Response) {
-  const text = await response.text();
-  if (!response.ok) {
-    console.error(`Calendly gateway failed [${response.status}]: ${text}`);
-    throw new Error(`Calendly request failed [${response.status}]`);
-  }
-  return JSON.parse(text) as T;
-}
-
 export const createDiscoverySchedulingLink = createServerFn({ method: "POST" }).handler(
   async () => {
+    const readJson = async <T,>(response: Response) => {
+      const text = await response.text();
+      if (!response.ok) {
+        console.error(`Calendly gateway failed [${response.status}]: ${text}`);
+        throw new Error(`Calendly request failed [${response.status}]`);
+      }
+      return JSON.parse(text) as T;
+    };
+
     const gatewayUrl = "https://connector-gateway.lovable.dev/calendly";
     const lovableApiKey = process.env.LOVABLE_API_KEY;
     const calendlyApiKey = process.env.CALENDLY_API_KEY;
