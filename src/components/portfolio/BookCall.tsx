@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Reveal } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
+import { createDiscoverySchedulingLink } from "@/lib/calendly.functions";
 import { createDiscoveryOrder, verifyDiscoveryPayment } from "@/lib/razorpay.functions";
 
 type RzpResponse = {
@@ -24,12 +25,11 @@ type RzpOptions = {
 declare global {
   interface Window {
     Razorpay?: new (opts: RzpOptions) => { open: () => void };
+    Calendly?: {
+      initInlineWidget: (opts: { url: string; parentElement: HTMLElement }) => void;
+    };
   }
 }
-
-const CALENDLY_URL =
-  (import.meta.env.VITE_CALENDLY_URL as string | undefined) ??
-  "https://calendly.com/amirkhan-setupr/discovery-call";
 
 function loadRzp() {
   return new Promise<boolean>((resolve) => {
@@ -44,17 +44,31 @@ function loadRzp() {
 
 export function BookCall() {
   const [status, setStatus] = useState<"idle" | "loading" | "paid" | "error">("idle");
+  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const calendlyRef = useRef<HTMLDivElement | null>(null);
   const createOrder = useServerFn(createDiscoveryOrder);
   const verifyPayment = useServerFn(verifyDiscoveryPayment);
+  const createSchedulingLink = useServerFn(createDiscoverySchedulingLink);
 
   useEffect(() => {
-    if (status !== "paid") return;
+    if (status !== "paid" || !bookingUrl || !calendlyRef.current) return;
+    const parentElement = calendlyRef.current;
+    const url = `${bookingUrl}?hide_gdpr_banner=1&background_color=080808&text_color=f2f2f2&primary_color=fbbf24`;
+    parentElement.innerHTML = "";
+
+    const init = () => window.Calendly?.initInlineWidget({ url, parentElement });
+    if (window.Calendly) {
+      init();
+      return;
+    }
     const s = document.createElement("script");
     s.src = "https://assets.calendly.com/assets/external/widget.js";
     s.async = true;
+    s.onload = init;
+    s.onerror = () => setError("Calendly could not load. Use the booking link below.");
     document.body.appendChild(s);
-  }, [status]);
+  }, [bookingUrl, status]);
 
   const onPay = async () => {
     setError(null);
@@ -79,7 +93,11 @@ export function BookCall() {
               signature: r.razorpay_signature,
             },
           });
-          if (ok) setStatus("paid");
+          if (ok) {
+            const link = await createSchedulingLink();
+            setBookingUrl(link.bookingUrl);
+            setStatus("paid");
+          }
           else {
             setError("Payment verification failed. Contact me directly.");
             setStatus("error");
@@ -130,7 +148,7 @@ export function BookCall() {
                   onClick={onPay}
                   className="bg-accent px-10 py-5 font-display text-xl uppercase tracking-widest text-bg"
                 >
-                  {status === "loading" ? "Opening…" : "Pay & book slot →"}
+                  {status === "loading" ? "Opening..." : "Pay & book slot"}
                 </MagneticButton>
               </div>
               {error && (
@@ -146,11 +164,17 @@ export function BookCall() {
               <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
                 Payment received, pick a slot
               </p>
-              <div
-                className="calendly-inline-widget"
-                data-url={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=080808&text_color=f2f2f2&primary_color=fbbf24`}
-                style={{ minWidth: "320px", height: "720px" }}
-              />
+              <div ref={calendlyRef} style={{ minWidth: "320px", height: "720px" }} />
+              {bookingUrl && (
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-block font-mono text-[10px] uppercase tracking-widest text-accent underline underline-offset-4"
+                >
+                  Open booking page
+                </a>
+              )}
             </div>
           </Reveal>
         )}
