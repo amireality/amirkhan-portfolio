@@ -57,29 +57,9 @@ export function BookCall() {
     setDevSkip(new URLSearchParams(window.location.search).has("devskip"));
   }, []);
 
-  useEffect(() => {
-    if (status !== "paid" || !bookingUrl || !calendlyRef.current) return;
-    const parentElement = calendlyRef.current;
-    const url = `${bookingUrl}?hide_gdpr_banner=1&primary_color=fbbf24`;
-    parentElement.innerHTML = "";
-
-    const init = () => window.Calendly?.initInlineWidget({ url, parentElement });
-    if (window.Calendly) {
-      init();
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    s.onload = init;
-    s.onerror = () => setError("Calendly could not load. Use the booking link below.");
-    document.body.appendChild(s);
-  }, [bookingUrl, status]);
-
   const revealBooking = (url: string) => {
     setBookingUrl(url);
     setStatus("paid");
-    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const onPay = async () => {
@@ -202,27 +182,23 @@ export function BookCall() {
           </Reveal>
         ) : (
           <Reveal>
-            <div className="border border-accent/30 bg-accent/[0.03] p-6">
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                  Payment received, pick a slot
-                </p>
-                {bookingUrl && (
-                  <a
-                    href={bookingUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="border border-accent/50 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-bg"
-                  >
-                    Open Calendly
-                  </a>
-                )}
-              </div>
-              <p className="mb-5 max-w-xl text-sm text-muted">
-                Calendly opens in a new tab after payment. If your browser blocks it,
-                use the button above.
+            <div className="border border-accent/30 bg-accent/[0.03] p-8 md:p-12 text-center">
+              <h3 className="font-display text-4xl uppercase mb-4 text-accent">
+                Payment Successful!
+              </h3>
+              <p className="mb-8 max-w-xl mx-auto text-lg text-muted">
+                Your payment has been verified. Please click the button below to schedule your discovery call on Calendly.
               </p>
-              <div ref={calendlyRef} style={{ minWidth: "320px", height: "720px" }} />
+              {bookingUrl && (
+                <a
+                  href={`${bookingUrl}?hide_gdpr_banner=1&primary_color=fbbf24`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block bg-accent px-10 py-5 font-display text-xl uppercase tracking-widest text-bg hover:opacity-90 transition-opacity"
+                >
+                  Schedule Call
+                </a>
+              )}
             </div>
           </Reveal>
         )}
