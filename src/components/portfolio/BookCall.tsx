@@ -60,7 +60,7 @@ export function BookCall() {
   useEffect(() => {
     if (status !== "paid" || !bookingUrl || !calendlyRef.current) return;
     const parentElement = calendlyRef.current;
-    const url = `${bookingUrl}?hide_gdpr_banner=1&background_color=080808&text_color=f2f2f2&primary_color=fbbf24`;
+    const url = `${bookingUrl}?hide_gdpr_banner=1&primary_color=fbbf24`;
     parentElement.innerHTML = "";
 
     const init = () => window.Calendly?.initInlineWidget({ url, parentElement });
@@ -75,6 +75,12 @@ export function BookCall() {
     s.onerror = () => setError("Calendly could not load. Use the booking link below.");
     document.body.appendChild(s);
   }, [bookingUrl, status]);
+
+  const revealBooking = (url: string) => {
+    setBookingUrl(url);
+    setStatus("paid");
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   const onPay = async () => {
     setError(null);
@@ -102,8 +108,7 @@ export function BookCall() {
             });
             if (ok) {
               const link = await createSchedulingLink();
-              setBookingUrl(link.bookingUrl);
-              setStatus("paid");
+              revealBooking(link.bookingUrl);
             } else {
               setError("Payment verification failed. Contact me directly.");
               setStatus("error");
@@ -129,8 +134,7 @@ export function BookCall() {
     setStatus("loading");
     try {
       const link = await createSchedulingLink();
-      setBookingUrl(link.bookingUrl);
-      setStatus("paid");
+      revealBooking(link.bookingUrl);
     } catch (e) {
       console.error(e);
       setError(e instanceof Error ? e.message : "Calendly booking link could not be created");
@@ -199,20 +203,26 @@ export function BookCall() {
         ) : (
           <Reveal>
             <div className="border border-accent/30 bg-accent/[0.03] p-6">
-              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                Payment received, pick a slot
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                  Payment received, pick a slot
+                </p>
+                {bookingUrl && (
+                  <a
+                    href={bookingUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border border-accent/50 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-bg"
+                  >
+                    Open Calendly
+                  </a>
+                )}
+              </div>
+              <p className="mb-5 max-w-xl text-sm text-muted">
+                Calendly opens in a new tab after payment. If your browser blocks it,
+                use the button above.
               </p>
               <div ref={calendlyRef} style={{ minWidth: "320px", height: "720px" }} />
-              {bookingUrl && (
-                <a
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-block font-mono text-[10px] uppercase tracking-widest text-accent underline underline-offset-4"
-                >
-                  Open booking page
-                </a>
-              )}
             </div>
           </Reveal>
         )}
