@@ -86,20 +86,25 @@ export function BookCall() {
         description: "30-min working call, fee credited if we work together.",
         theme: { color: "#fbbf24" },
         handler: async (r) => {
-          const { ok } = await verifyPayment({
-            data: {
-              orderId: r.razorpay_order_id,
-              paymentId: r.razorpay_payment_id,
-              signature: r.razorpay_signature,
-            },
-          });
-          if (ok) {
-            const link = await createSchedulingLink();
-            setBookingUrl(link.bookingUrl);
-            setStatus("paid");
-          }
-          else {
-            setError("Payment verification failed. Contact me directly.");
+          try {
+            const { ok } = await verifyPayment({
+              data: {
+                orderId: r.razorpay_order_id,
+                paymentId: r.razorpay_payment_id,
+                signature: r.razorpay_signature,
+              },
+            });
+            if (ok) {
+              const link = await createSchedulingLink();
+              setBookingUrl(link.bookingUrl);
+              setStatus("paid");
+            } else {
+              setError("Payment verification failed. Contact me directly.");
+              setStatus("error");
+            }
+          } catch (e) {
+            console.error(e);
+            setError(e instanceof Error ? e.message : "Calendly booking link could not be created");
             setStatus("error");
           }
         },
