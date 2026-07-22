@@ -65,22 +65,11 @@ export const createDiscoverySchedulingLink = createServerFn({ method: "POST" }).
       throw new Error("No active Calendly event type is available");
     }
 
-    const schedulingLink = await readJson<CalendlySchedulingLinkResponse>(
-      await fetch(`${gatewayUrl}/scheduling_links`, {
-        method: "POST",
-        headers: {
-          ...headers,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          max_event_count: 1,
-          owner: eventType.uri,
-          owner_type: "EventType",
-        }),
-      }),
-    );
-
-    const bookingUrl = schedulingLink.resource?.booking_url ?? eventType.scheduling_url;
+    // Calendly's single-use scheduling_links fail with a "tid-rb" security
+    // error when embedded from a third-party origin without a Calendly
+    // session. The event type's public scheduling_url has no such
+    // restriction and lets any visitor pick a slot.
+    const bookingUrl = eventType.scheduling_url;
     if (!bookingUrl) throw new Error("Calendly booking link could not be created");
 
     return {
