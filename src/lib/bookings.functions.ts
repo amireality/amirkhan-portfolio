@@ -133,16 +133,22 @@ export const createConfirmedBooking = createServerFn({ method: "POST" })
     },
   )
   .handler(async ({ data }) => {
-    // 1. Verify Razorpay signature
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
-    if (!keySecret) throw new Error("Razorpay secret not configured");
-    const expected = createHmac("sha256", keySecret)
-      .update(`${data.orderId}|${data.paymentId}`)
-      .digest("hex");
-    const a = Buffer.from(expected);
-    const b = Buffer.from(data.signature);
-    if (a.length !== b.length || !timingSafeEqual(a, b)) {
-      throw new Error("Invalid payment signature");
+    // 1. Verify Razorpay signature (dev bypass allowed only in non-production builds)
+    const isDevBypass =
+      data.signature === "dev" &&
+      data.orderId.startsWith("dev_") &&
+      process.env.NODE_ENV !== "production";
+    if (!isDevBypass) {
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      if (!keySecret) throw new Error("Razorpay secret not configured");
+      const expected = createHmac("sha256", keySecret)
+        .update(`${data.orderId}|${data.paymentId}`)
+        .digest("hex");
+      const a = Buffer.from(expected);
+      const b = Buffer.from(data.signature);
+      if (a.length !== b.length || !timingSafeEqual(a, b)) {
+        throw new Error("Invalid payment signature");
+      }
     }
 
     const start = new Date(data.startISO);
