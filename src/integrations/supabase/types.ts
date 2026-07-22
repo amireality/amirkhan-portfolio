@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      discovery_bookings: {
+        Row: {
+          created_at: string
+          email: string
+          end_at: string
+          google_event_id: string | null
+          id: string
+          name: string
+          notes: string | null
+          razorpay_order_id: string | null
+          razorpay_payment_id: string | null
+          start_at: string
+          status: string
+          timezone: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          end_at: string
+          google_event_id?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          start_at: string
+          status?: string
+          timezone?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          end_at?: string
+          google_event_id?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          start_at?: string
+          status?: string
+          timezone?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
