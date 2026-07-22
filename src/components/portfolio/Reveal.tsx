@@ -13,7 +13,6 @@ export function Reveal({
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       initial={{ opacity: 0, y }}
@@ -30,7 +29,6 @@ export function Reveal({
 export function SplitHeading({ text, className }: { text: string; className?: string }) {
   const reduce = useReducedMotion();
   const words = text.split(" ");
-  if (reduce) return <h1 className={className}>{text}</h1>;
   return (
     <h1 className={className} aria-label={text}>
       {words.map((w, i) => (

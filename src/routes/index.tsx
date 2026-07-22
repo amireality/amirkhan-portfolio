@@ -360,7 +360,7 @@ function Services() {
       <div className="grid grid-cols-1 border border-border md:grid-cols-2 lg:grid-cols-3">
         {services.map((s, i) => (
           <Reveal key={s.n} delay={i * 0.05}>
-            <div className="group h-full border-b border-r border-border p-8 transition-colors hover:bg-accent/[0.03]">
+            <div className="group h-full border-b border-r border-border p-8 transition-colors hover:bg-[#1a1a1a]">
               <div className="mb-16 flex items-start justify-between">
                 <span className="font-mono text-[10px] text-muted">{s.n}</span>
                 <span className="size-2 rounded-full bg-border transition-colors group-hover:bg-accent" />
@@ -385,7 +385,7 @@ function Ventures() {
       <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
         {ventures.map((v, i) => (
           <Reveal key={v.name} delay={i * 0.06}>
-            <article className="group relative flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-accent/[0.03] md:p-12">
+            <article className="group relative flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-[#1a1a1a] md:p-12">
               <div className="mb-16 flex items-start justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
                   {v.idx} / {v.kind}
@@ -562,7 +562,7 @@ function Writing() {
       <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
         {writing.map((w, i) => (
           <Reveal key={w.title} delay={i * 0.05}>
-            <article className="flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-accent/[0.03]">
+            <article className="flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-[#1a1a1a]">
               <div>
                 <span className="mb-6 inline-block font-mono text-[10px] uppercase tracking-widest text-accent">{w.tag}</span>
                 <h3 className="mb-4 font-display text-2xl uppercase leading-tight">{w.title}</h3>
