@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import type {} from "@tanstack/react-start";
+import { sections, writing } from "../data/content";
 
 const BASE_URL = "https://amir.setupr.com";
 
@@ -16,6 +16,16 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
         ];
+
+        // Add section anchor links
+        sections.forEach((section) => {
+          entries.push({ path: `/#${section.id}`, changefreq: "weekly", priority: "0.8" });
+        });
+
+        // Add article anchor links
+        writing.forEach((article) => {
+          entries.push({ path: `/#writing-${article.slug}`, changefreq: "monthly", priority: "0.7" });
+        });
 
         const urls = entries.map((e) =>
           [

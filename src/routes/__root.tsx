@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { sections, writing } from "../data/content";
 
 function NotFoundComponent() {
   return (
@@ -104,6 +105,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "mainEntity": {
+            "@type": "Person",
+            "name": "Amir Khan",
+            "url": "https://amir.setupr.com/",
+            "sameAs": [
+              "https://setupr.com/",
+              "https://altered.co.in/"
+            ]
+          },
+          "hasPart": [
+            ...sections.map(s => ({
+              "@type": "SiteNavigationElement",
+              "name": s.name,
+              "url": `https://amir.setupr.com/#${s.id}`
+            })),
+            ...writing.map(w => ({
+              "@type": "Article",
+              "headline": w.title,
+              "url": `https://amir.setupr.com/#writing-${w.slug}`
+            }))
+          ]
+        })
+      }
     ],
   }),
   shellComponent: RootShell,
