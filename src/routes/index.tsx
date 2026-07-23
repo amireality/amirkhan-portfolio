@@ -266,8 +266,7 @@ function HeroInner() {
         />
         <div className="mt-6 flex flex-col justify-between gap-6 md:mt-8 md:flex-row md:items-end">
           <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.6s" }}>
-            I build brands, websites, and AI-native systems, end to end,{" "}
-            <span className="text-accent">through AI-assisted prompting</span>.
+            I build brands, websites, and AI-native systems, end to end.
           </p>
           <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.9s" }}>
             <NodeTicker />
@@ -445,7 +444,7 @@ function Sites() {
           <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">[04] Web Archive</p>
           <h2 className="font-display text-5xl uppercase md:text-6xl">Sites I&rsquo;ve built</h2>
           <p className="mt-4 max-w-md text-pretty text-muted">
-            End-to-end web builds shipped through AI-assisted prompting. Placeholder previews, swap in real screenshots and links.
+            End-to-end web builds shipped to production. 
           </p>
         </Reveal>
         <span className="font-mono text-[10px] uppercase tracking-widest text-muted">{sites.length} shipped</span>
