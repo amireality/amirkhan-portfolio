@@ -86,8 +86,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Amir Khan, Founder, Vibecoder & Operator" },
       { name: "twitter:description", content: "Personal portfolio and command center of Amir Khan, founder of Setupr, operator of ALTERED and Alt, and AI-assisted web builder from Jaipur, India." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/128fd1d5-f997-4edf-9e7c-bda93cf3d44f/id-preview-972e0b89--c9dd936f-fbec-41e2-9a47-1643ab05dd10.lovable.app-1784314983082.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/128fd1d5-f997-4edf-9e7c-bda93cf3d44f/id-preview-972e0b89--c9dd936f-fbec-41e2-9a47-1643ab05dd10.lovable.app-1784314983082.png" },
+      { property: "og:image", content: "https://amir.setupr.com/portfolio/portfolio.jpg" },
+      { name: "twitter:image", content: "https://amir.setupr.com/portfolio/portfolio.jpg" },
     ],
     links: [
       {
@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
