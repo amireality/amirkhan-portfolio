@@ -11,6 +11,44 @@ const Hero3D = lazy(() =>
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { property: "og:url", content: "https://amir.setupr.com/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://amir.setupr.com/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Amir Khan",
+          jobTitle: "Founder",
+          url: "https://amir.setupr.com/",
+          worksFor: [
+            { "@type": "Organization", name: "Setupr", url: "https://setupr.com/" },
+            { "@type": "Organization", name: "ALTERED" },
+            { "@type": "Organization", name: "Alt" },
+          ],
+          address: { "@type": "PostalAddress", addressLocality: "Jaipur", addressCountry: "IN" },
+          sameAs: ["https://www.linkedin.com/in/amirkhan"],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Amir Khan",
+          url: "https://amir.setupr.com/",
+          description:
+            "Personal portfolio and command center of Amir Khan, founder of Setupr, operator of ALTERED and Alt, and AI-assisted web builder from Jaipur, India.",
+        }),
+      },
+    ],
+  }),
 });
 
 const ventures = [
