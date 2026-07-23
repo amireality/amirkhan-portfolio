@@ -26,7 +26,6 @@ export const EmailShell = ({ preview, children }: EmailShellProps) => (
     <Body style={main}>
       <Section style={fullBleed}>
         <Container style={container}>
-          <Text style={eyebrow}>[AMIR.SETUPR.COM] // Console</Text>
           {children}
           <Hr style={hr} />
           <SignatureFooter />
@@ -43,7 +42,7 @@ export const SignatureFooter = () => (
         <tr>
           <td style={{ verticalAlign: 'top', paddingRight: '16px' }}>
             <Text style={sigName}>
-              Amir Khan <span style={{ color: accent }}>//</span>
+              Amir Khan <span style={{ color: fgMid }}>//</span>
             </Text>
             <Text style={sigLine}>
               Founder of Setupr. Building brands, websites, and AI-native
@@ -79,7 +78,7 @@ export const SignatureFooter = () => (
 
 // ---- Shared design tokens ----
 
-export const accent = '#fbbf24'
+export const accent = '#f5f5f5'
 export const bg = '#080808'
 export const surface = '#0f0f0f'
 export const border = '#1f1f1f'
@@ -108,14 +107,6 @@ const container = {
   margin: '0 auto',
   padding: '32px 28px',
   backgroundColor: bg,
-}
-const eyebrow = {
-  fontFamily: monoStack,
-  fontSize: '10px',
-  letterSpacing: '3px',
-  textTransform: 'uppercase' as const,
-  color: accent,
-  margin: '0 0 28px',
 }
 const hr = {
   borderColor: border,
@@ -199,7 +190,7 @@ export const buttonWrap = {
   margin: '28px 0 32px',
 }
 export const buttonStyle = {
-  backgroundColor: accent,
+  backgroundColor: '#f5f5f5',
   color: '#080808',
   fontFamily: fontStack,
   fontWeight: 700,
@@ -223,7 +214,7 @@ export const codeBoxStyle = {
   fontFamily: monoStack,
   fontSize: '26px',
   fontWeight: 700,
-  color: accent,
+  color: fgHigh,
   margin: '8px 0 24px',
   letterSpacing: '0.4em',
   padding: '18px 24px',
