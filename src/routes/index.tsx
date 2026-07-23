@@ -732,7 +732,7 @@ function Contact() {
           <form onSubmit={onSubmit} className="space-y-12">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
               <Field label="Your name" name="name" required placeholder="AMIR KHAN" />
-              <Field label="Email" name="email" type="email" required placeholder="AK@SETUPR.IN" />
+              <Field label="Email" name="email" type="email" required placeholder="AMIR@SETUPR.COM" />
             </div>
             <Field label="Project parameters" name="msg" textarea required placeholder="DESCRIBE THE VISION" />
             <div>
@@ -760,7 +760,7 @@ function Field({
   label: string; name: string; type?: string; textarea?: boolean; required?: boolean; placeholder?: string;
 }) {
   const cn =
-    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-muted focus:border-accent";
+    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-white/20 focus:border-accent";
   return (
     <label className="block space-y-4">
       <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">{label}</span>
