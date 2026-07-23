@@ -1,9 +1,13 @@
 # Amir Khan
 
-> Personal portfolio and command center of Amir Khan, founder of Setupr, operator of ALTERED and Alt, and AI-assisted web builder from Jaipur, India.
+> Personal portfolio and command center of Amir Khan, founder of Setupr and operator of ALTERED.
 
-Amir builds brands, websites, and AI-native systems end to end through AI-assisted prompting ("vibecoding"). Setupr is his agency for Indian founders and SMBs; ALTERED is a pre-launch D2C women's urban ethnic apparel brand; Alt is an on-premise LLM project.
+Amir builds brands, websites, and systems end-to-end. 
+
+## Ventures
+- [Setupr](https://setupr.com/): An IT and financial services agency for Indian founders and SMBs.
+- [ALTERED](https://altered.co.in/): A pre-launch D2C women's urban ethnic apparel brand.
+- Alt: An on-premise LLM infrastructure project.
 
 ## Pages
-
-- [Home](/): Portfolio, ventures, web archive, process, writing, and booking a paid discovery call.
+- [Home](https://amir.setupr.com/): Portfolio, ventures, web archive, process, writing, and booking a paid discovery call.
