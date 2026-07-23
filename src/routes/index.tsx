@@ -617,7 +617,7 @@ function Writing() {
   const toggleArticle = (slug: string) => {
     if (expandedSlug === slug) {
       setExpandedSlug(null);
-      window.history.pushState(null, "", window.location.pathname + window.location.search);
+      window.history.replaceState(null, "", "#writing");
     } else {
       setExpandedSlug(slug);
       window.history.pushState(null, "", `#writing-${slug}`);
@@ -715,10 +715,10 @@ function Contact() {
     <section id="contact" className="border-t border-border px-6 py-32 md:px-20">
       <div className="mx-auto max-w-4xl">
         <Reveal>
-          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">[08] Connection</p>
-          <h2 className="mb-4 font-display text-5xl uppercase md:text-7xl">Start something.</h2>
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">[09] General Query</p>
+          <h2 className="mb-4 font-display text-5xl uppercase md:text-7xl">Reach out.</h2>
           <p className="mb-16 max-w-xl text-lg text-muted">
-            Setup, brand, cloud, GTM, or a full site built in weeks not quarters. Tell me what you&rsquo;re building.
+            Have a general question, partnership idea, or just want to connect? Drop me a line and I'll get back to you inside 24 hours.
           </p>
         </Reveal>
         {sent ? (
@@ -787,16 +787,10 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:items-end">
           <div className="flex gap-6">
-            <a
-              href="https://www.linkedin.com/company/setupr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-accent"
-            >
-              LinkedIn
-            </a>
-            <a href="mailto:ak@setupr.in" className="hover:text-accent">Email</a>
-            <a href="#contact" className="hover:text-accent">Contact</a>
+            <a href="https://www.linkedin.com/in/amireality/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">LinkedIn</a>
+            <a href="https://www.instagram.com/amireality/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Instagram</a>
+            <a href="https://x.com/Amireality" target="_blank" rel="noopener noreferrer" className="hover:text-accent">X</a>
+            <a href="https://setupr.com/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">SETUPR</a>
           </div>
           <div>© {new Date().getFullYear()}, All systems nominal</div>
           <div className="text-muted">Designed for the late-night console.</div>

@@ -193,7 +193,7 @@ export function BookCall() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-            [09] Direct Line
+            [08] Direct Line
           </p>
           <h2 className="mb-4 font-display text-5xl uppercase md:text-7xl">
             Book a discovery call
