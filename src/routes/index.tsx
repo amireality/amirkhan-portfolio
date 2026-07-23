@@ -90,18 +90,20 @@ function Index() {
     <div className="noise relative min-h-screen bg-bg font-body text-fg selection:bg-accent selection:text-bg">
       <SmoothScroll />
       <Nav />
-      <Hero />
-      <Marquee />
-      <About />
-      <Services />
-      <Ventures />
-      <Sites />
-      <Stats />
-      <Process />
-      <ToolsSection />
-      <Writing />
-      <BookCall />
-      <Contact />
+      <main id="main">
+        <Hero />
+        <Marquee />
+        <About />
+        <Services />
+        <Ventures />
+        <Sites />
+        <Stats />
+        <Process />
+        <ToolsSection />
+        <Writing />
+        <BookCall />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
@@ -575,7 +577,13 @@ function Writing() {
                 <h3 className="mb-4 font-display text-2xl uppercase leading-tight">{w.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{w.excerpt}</p>
               </div>
-              <a href="#" className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg hover:text-accent">Read →</a>
+              <a
+                href="#contact"
+                aria-label={`Discuss: ${w.title}`}
+                className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg hover:text-accent"
+              >
+                Discuss this topic →
+              </a>
             </article>
           </Reveal>
         ))}
@@ -659,13 +667,19 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:items-end">
           <div className="flex gap-6">
-            <a href="#" className="hover:text-accent">LinkedIn</a>
-            <a href="#" className="hover:text-accent">Twitter</a>
-            <a href="#" className="hover:text-accent">Github</a>
-            <a href="#" className="hover:text-accent">Email</a>
+            <a
+              href="https://www.linkedin.com/company/setupr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-accent"
+            >
+              LinkedIn
+            </a>
+            <a href="mailto:ak@setupr.in" className="hover:text-accent">Email</a>
+            <a href="#contact" className="hover:text-accent">Contact</a>
           </div>
           <div>© {new Date().getFullYear()}, All systems nominal</div>
-          <div className="text-fg/40">Designed for the late-night console.</div>
+          <div className="text-muted">Designed for the late-night console.</div>
         </div>
       </div>
     </footer>
