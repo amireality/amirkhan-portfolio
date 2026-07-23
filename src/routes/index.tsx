@@ -133,7 +133,7 @@ function Nav() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-12">
         <a href="#top" className="flex items-center gap-3">
           <img src="/favicon.png" alt="Amir Khan" className="size-5 animate-pulse rounded-full object-cover" />
-          <span className="font-mono text-xs uppercase tracking-[0.2em]">AK / 407</span>
+          <span className="font-mono text-xs uppercase tracking-[0.2em]">amireality</span>
         </a>
         <div className="hidden gap-8 font-mono text-[10px] uppercase tracking-[0.25em] text-muted md:flex">
           {links.map((l) => (
