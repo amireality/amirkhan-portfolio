@@ -680,9 +680,36 @@ function Writing() {
 
 function Contact() {
   const [sent, setSent] = useState(false);
-  const onSubmit = (e: FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    if (submitting) return;
+    setError(null);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") || ""),
+      email: String(data.get("email") || ""),
+      message: String(data.get("msg") || ""),
+    };
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Could not transmit signal. Try again.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <section id="contact" className="border-t border-border px-6 py-32 md:px-20">
@@ -709,9 +736,16 @@ function Contact() {
             </div>
             <Field label="Project parameters" name="msg" textarea required placeholder="DESCRIBE THE VISION" />
             <div>
-              <MagneticButton type="submit" className="bg-accent px-10 py-5 font-display text-xl uppercase tracking-widest text-bg">
-                Transmit signal ↗
+              <MagneticButton
+                type="submit"
+                disabled={submitting}
+                className="bg-accent px-10 py-5 font-display text-xl uppercase tracking-widest text-bg disabled:opacity-60"
+              >
+                {submitting ? "Transmitting..." : "Transmit signal ↗"}
               </MagneticButton>
+              {error ? (
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-red-400">{error}</p>
+              ) : null}
             </div>
           </form>
         )}

@@ -7,12 +7,14 @@ export function MagneticButton({
   href,
   onClick,
   type,
+  disabled,
 }: {
   children: ReactNode;
   className?: string;
   href?: string;
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [xy, setXy] = useState({ x: 0, y: 0 });
@@ -57,7 +59,7 @@ export function MagneticButton({
       onMouseLeave={handleLeave}
       className="inline-block"
     >
-      <button type={type ?? "button"} onClick={onClick} className="block w-full">
+      <button type={type ?? "button"} onClick={onClick} disabled={disabled} className="block w-full disabled:cursor-not-allowed">
         {inner}
       </button>
     </div>
