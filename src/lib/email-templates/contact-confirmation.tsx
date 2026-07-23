@@ -6,7 +6,6 @@ import {
   border,
   fgHigh,
   fgLow,
-  fgMid,
   h1Style,
   helperStyle,
   surface,
@@ -73,5 +72,3 @@ const value = {
   color: fgHigh,
   margin: 0,
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _ = fgMid
