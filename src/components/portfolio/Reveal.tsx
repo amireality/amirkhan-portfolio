@@ -37,7 +37,7 @@ export function SplitHeading({ text, className }: { text: string; className?: st
             className="inline-block"
             initial={{ y: "110%" }}
             animate={{ y: "0%" }}
-            transition={{ duration: 1, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
           >
             {w}
           </motion.span>

@@ -265,16 +265,16 @@ function HeroInner() {
           className="font-display text-[15vw] leading-[0.85] uppercase tracking-tight md:text-[11vw]"
         />
         <div className="mt-6 flex flex-col justify-between gap-6 md:mt-8 md:flex-row md:items-end">
-          <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.6s" }}>
+          <p className="fade-up max-w-xl text-pretty text-base font-light leading-relaxed text-fg/90 md:text-xl" style={{ animationDelay: "0.2s" }}>
             I build brands, websites, and AI-native systems, end to end.
           </p>
-          <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.9s" }}>
+          <div className="fade-up font-mono text-[11px] uppercase tracking-[0.2em] text-muted" style={{ animationDelay: "0.3s" }}>
             <NodeTicker />
             <div>[STATUS] Taking on new work, Q1</div>
             <div>[LAST SHIP] 4 hours ago</div>
           </div>
         </div>
-        <div className="fade-up mt-8 flex flex-wrap gap-4 md:mt-10" style={{ animationDelay: "1.1s" }}>
+        <div className="fade-up mt-8 flex flex-wrap gap-4 md:mt-10" style={{ animationDelay: "0.4s" }}>
           <MagneticButton
             href="#work"
             className="bg-accent px-6 py-3 font-display text-base uppercase tracking-widest text-bg md:px-8 md:py-4 md:text-lg"
