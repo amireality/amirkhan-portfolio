@@ -1,6 +1,17 @@
 import React from 'react'
-import { Body, Container, Head, Heading, Hr, Html, Preview, Section, Text } from '@react-email/components'
+import { Heading, Section, Text } from '@react-email/components'
 import type { TemplateEntry } from './registry'
+import {
+  EmailShell,
+  border,
+  fgHigh,
+  fgLow,
+  fgMid,
+  h1Style,
+  helperStyle,
+  surface,
+  textStyle,
+} from './_layout'
 
 interface Props {
   name?: string
@@ -8,35 +19,27 @@ interface Props {
 }
 
 const Email = ({ name = 'there', message = '' }: Props) => (
-  <Html lang="en" dir="ltr">
-    <Head />
-    <Preview>Signal received. I'll be in touch inside 24 hours.</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Text style={eyebrow}>[SIGNAL RECEIVED] amir.setupr.com</Text>
-        <Heading style={h1}>Thanks, {name}.</Heading>
-        <Text style={body}>
-          Your message reached the console. I read every inbound personally and reply
-          inside 24 hours, usually faster.
-        </Text>
-        <Text style={body}>
-          In the meantime, if it's urgent you can reply directly to this email.
-        </Text>
-        {message ? (
-          <Section style={card}>
-            <Text style={label}>What you sent</Text>
-            <Text style={{ ...value, whiteSpace: 'pre-wrap' }}>{message}</Text>
-          </Section>
-        ) : null}
-        <Hr style={hr} />
-        <Text style={sig}>
-          Amir Khan<br />
-          Founder, Setupr<br />
-          <a href="https://amir.setupr.com" style={link}>amir.setupr.com</a>
-        </Text>
-      </Container>
-    </Body>
-  </Html>
+  <EmailShell preview="Signal received. I'll be in touch inside 24 hours.">
+    <Heading style={h1Style}>Thanks, {name}.</Heading>
+    <Text style={textStyle}>
+      Your message reached the console. I read every inbound personally and
+      reply inside 24 hours, usually faster.
+    </Text>
+    <Text style={textStyle}>
+      If it's urgent, just reply directly to this email and it lands in my
+      inbox.
+    </Text>
+    {message ? (
+      <Section style={card}>
+        <Text style={label}>What you sent</Text>
+        <Text style={{ ...value, whiteSpace: 'pre-wrap' }}>{message}</Text>
+      </Section>
+    ) : null}
+    <Text style={helperStyle}>
+      You're receiving this because you submitted the contact form on
+      amir.setupr.com.
+    </Text>
+  </EmailShell>
 )
 
 export const template = {
@@ -49,14 +52,26 @@ export const template = {
   },
 } satisfies TemplateEntry
 
-const main = { backgroundColor: '#ffffff', fontFamily: 'Inter, Arial, sans-serif', color: '#080808' }
-const container = { padding: '32px 28px', maxWidth: '560px' }
-const eyebrow = { fontFamily: 'monospace', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#a16207', margin: '0 0 12px' }
-const h1 = { fontSize: '32px', fontWeight: 700, margin: '0 0 20px', letterSpacing: '-0.02em', color: '#080808' }
-const body = { fontSize: '15px', lineHeight: '24px', color: '#404040', margin: '0 0 16px' }
-const card = { border: '1px solid #e5e5e5', borderRadius: '8px', padding: '16px 20px', margin: '20px 0' }
-const label = { fontFamily: 'monospace', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#737373', margin: '0 0 6px' }
-const value = { fontSize: '14px', lineHeight: '22px', color: '#080808', margin: 0 }
-const hr = { borderColor: '#e5e5e5', margin: '28px 0 20px' }
-const sig = { fontSize: '14px', color: '#404040', lineHeight: '22px' }
-const link = { color: '#a16207', textDecoration: 'none' }
+const card = {
+  border: `1px solid ${border}`,
+  borderRadius: '4px',
+  padding: '18px 22px',
+  margin: '20px 0 24px',
+  backgroundColor: surface,
+}
+const label = {
+  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+  fontSize: '10px',
+  letterSpacing: '3px',
+  textTransform: 'uppercase' as const,
+  color: fgLow,
+  margin: '0 0 8px',
+}
+const value = {
+  fontSize: '14px',
+  lineHeight: '22px',
+  color: fgHigh,
+  margin: 0,
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _ = fgMid
