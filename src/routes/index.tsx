@@ -640,7 +640,7 @@ function Field({
   label: string; name: string; type?: string; textarea?: boolean; required?: boolean; placeholder?: string;
 }) {
   const cn =
-    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-fg/10 focus:border-accent";
+    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-muted focus:border-accent";
   return (
     <label className="block space-y-4">
       <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">{label}</span>
