@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
 import { Reveal, SplitHeading } from "@/components/portfolio/Reveal";
 import { MagneticButton } from "@/components/portfolio/MagneticButton";
@@ -118,9 +119,27 @@ const tools = [
 ];
 
 const writing = [
-  { tag: "LinkedIn", title: "Why 'vibecoding' isn't a shortcut, it's a discipline", excerpt: "The people scoffing at AI-assisted development are the same people who scoffed at Squarespace in 2013." },
-  { tag: "Blog", title: "The first 90 days of any Indian SMB", excerpt: "A working checklist from GST to Google Workspace, written from the receipts of doing it dozens of times." },
-  { tag: "LinkedIn", title: "Your ICP is a person, not a segment", excerpt: "If you can't name three actual humans that match it, you don't have an ICP, you have a slide." },
+  { 
+    slug: "vibecoding-discipline",
+    tag: "LinkedIn", 
+    title: "Why 'vibecoding' isn't a shortcut, it's a discipline", 
+    excerpt: "The people scoffing at AI-assisted development are the same people who scoffed at Squarespace in 2013.",
+    content: "When people see 'AI-assisted development', they often assume it means pressing a magic button and getting a finished product. In reality, vibecoding requires immense discipline. You have to know how to structure your prompts, understand the architecture you're aiming for, and debug when the AI hallucinates. The barrier to entry has lowered, but the ceiling for mastery is higher than ever."
+  },
+  { 
+    slug: "first-90-days-smb",
+    tag: "Blog", 
+    title: "The first 90 days of any Indian SMB", 
+    excerpt: "A working checklist from GST to Google Workspace, written from the receipts of doing it dozens of times.",
+    content: "Starting a business in India comes with a unique set of bureaucratic hurdles. Your first 90 days dictate the operational tone for the next 3 years. This means getting your GST registration sorted immediately, setting up professional email infrastructure, and establishing clear accounting practices before your first invoice goes out. Delaying these foundational elements always leads to compounding technical and legal debt."
+  },
+  { 
+    slug: "icp-is-a-person",
+    tag: "LinkedIn", 
+    title: "Your ICP is a person, not a segment", 
+    excerpt: "If you can't name three actual humans that match it, you don't have an ICP, you have a slide.",
+    content: "Too many startups define their Ideal Customer Profile (ICP) as 'B2B SaaS companies in North America with 50-200 employees.' That's a demographic segment, not an ICP. An actual ICP looks like 'Sarah, VP of Engineering at a Series B startup, who is frustrated by the time her team spends managing CI/CD pipelines.' If you don't know what keeps your ICP awake at night, your marketing will always sound generic."
+  },
 ];
 
 function Index() {
@@ -600,6 +619,38 @@ function ToolsSection() {
 }
 
 function Writing() {
+  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith("#writing-")) {
+      const slug = hash.replace("#writing-", "");
+      if (writing.some(w => w.slug === slug)) {
+        setExpandedSlug(slug);
+        
+        // Slight delay to allow render before scrolling
+        setTimeout(() => {
+          const el = document.getElementById(`writing-${slug}`);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, []);
+
+  const toggleArticle = (slug: string) => {
+    if (expandedSlug === slug) {
+      setExpandedSlug(null);
+      window.history.pushState(null, "", window.location.pathname + window.location.search);
+    } else {
+      setExpandedSlug(slug);
+      window.history.pushState(null, "", `#writing-${slug}`);
+      setTimeout(() => {
+        const el = document.getElementById(`writing-${slug}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+  };
+
   return (
     <section id="writing" className="border-t border-border bg-white/[0.015] px-6 py-32 md:px-20">
       <Reveal>
@@ -607,24 +658,44 @@ function Writing() {
         <h2 className="mb-16 font-display text-5xl uppercase md:text-6xl">Writing &amp; content</h2>
       </Reveal>
       <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
-        {writing.map((w, i) => (
-          <Reveal key={w.title} delay={i * 0.05}>
-            <article className="flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-[#1a1a1a]">
+        {writing.map((w, i) => {
+          const isExpanded = expandedSlug === w.slug;
+          return (
+          <Reveal key={w.title} className={isExpanded ? "md:col-span-3" : ""} delay={i * 0.05}>
+            <article 
+              id={`writing-${w.slug}`}
+              className="flex h-full flex-col justify-between bg-bg p-8 transition-colors hover:bg-[#1a1a1a] cursor-pointer"
+              onClick={() => toggleArticle(w.slug)}
+            >
               <div>
                 <span className="mb-6 inline-block font-mono text-[10px] uppercase tracking-widest text-accent">{w.tag}</span>
                 <h3 className="mb-4 font-display text-2xl uppercase leading-tight">{w.title}</h3>
-                <p className="text-sm leading-relaxed text-muted">{w.excerpt}</p>
+                <p className={`text-sm leading-relaxed text-muted ${isExpanded ? "mb-6" : ""}`}>{w.excerpt}</p>
+                
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-4 border-t border-white/10 pt-6">
+                        <p className="text-base font-light leading-relaxed text-fg/90">
+                          {w.content}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <a
-                href="#contact"
-                aria-label={`Discuss: ${w.title}`}
-                className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg hover:text-accent"
-              >
-                Discuss this topic →
-              </a>
+              <div className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg">
+                {isExpanded ? "Close article ↑" : "Read article →"}
+              </div>
             </article>
           </Reveal>
-        ))}
+        )})}
       </div>
     </section>
   );
