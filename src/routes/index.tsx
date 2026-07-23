@@ -412,7 +412,7 @@ function Ventures() {
   );
 }
 
-function BrowserFrame({ src, href }: { src?: string; href?: string }) {
+function BrowserFrame({ src, href, name }: { src?: string; href?: string; name?: string }) {
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-[#111]">
       <div className="flex items-center gap-1.5 border-b border-border bg-[#0c0c0c] px-3 py-2">
@@ -427,7 +427,7 @@ function BrowserFrame({ src, href }: { src?: string; href?: string }) {
         {src ? (
           <img
             src={src}
-            alt="Site preview"
+            alt={name ? `Screenshot of ${name} website` : "Website screenshot"}
             className="absolute inset-0 h-full w-full object-cover object-top opacity-80 transition-opacity group-hover:opacity-100"
           />
         ) : null}
@@ -453,7 +453,7 @@ function Sites() {
         {sites.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
             <a href={s.href} target="_blank" rel="noopener noreferrer" className="group block">
-              <BrowserFrame src={s.imgSrc} href={s.href} />
+              <BrowserFrame src={s.imgSrc} href={s.href} name={s.name} />
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h4 className="font-display text-2xl uppercase transition-colors group-hover:text-accent">{s.name}</h4>
