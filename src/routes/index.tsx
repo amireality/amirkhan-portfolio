@@ -90,18 +90,20 @@ function Index() {
     <div className="noise relative min-h-screen bg-bg font-body text-fg selection:bg-accent selection:text-bg">
       <SmoothScroll />
       <Nav />
-      <Hero />
-      <Marquee />
-      <About />
-      <Services />
-      <Ventures />
-      <Sites />
-      <Stats />
-      <Process />
-      <ToolsSection />
-      <Writing />
-      <BookCall />
-      <Contact />
+      <main id="main">
+        <Hero />
+        <Marquee />
+        <About />
+        <Services />
+        <Ventures />
+        <Sites />
+        <Stats />
+        <Process />
+        <ToolsSection />
+        <Writing />
+        <BookCall />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
@@ -412,7 +414,7 @@ function Ventures() {
   );
 }
 
-function BrowserFrame({ src, href }: { src?: string; href?: string }) {
+function BrowserFrame({ src, href, name }: { src?: string; href?: string; name?: string }) {
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-[#111]">
       <div className="flex items-center gap-1.5 border-b border-border bg-[#0c0c0c] px-3 py-2">
@@ -427,7 +429,7 @@ function BrowserFrame({ src, href }: { src?: string; href?: string }) {
         {src ? (
           <img
             src={src}
-            alt="Site preview"
+            alt={name ? `Screenshot of ${name} website` : "Website screenshot"}
             className="absolute inset-0 h-full w-full object-cover object-top opacity-80 transition-opacity group-hover:opacity-100"
           />
         ) : null}
@@ -453,7 +455,7 @@ function Sites() {
         {sites.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
             <a href={s.href} target="_blank" rel="noopener noreferrer" className="group block">
-              <BrowserFrame src={s.imgSrc} href={s.href} />
+              <BrowserFrame src={s.imgSrc} href={s.href} name={s.name} />
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h4 className="font-display text-2xl uppercase transition-colors group-hover:text-accent">{s.name}</h4>
@@ -575,7 +577,13 @@ function Writing() {
                 <h3 className="mb-4 font-display text-2xl uppercase leading-tight">{w.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{w.excerpt}</p>
               </div>
-              <a href="#" className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg hover:text-accent">Read →</a>
+              <a
+                href="#contact"
+                aria-label={`Discuss: ${w.title}`}
+                className="mt-10 font-mono text-[10px] uppercase tracking-widest text-fg hover:text-accent"
+              >
+                Discuss this topic →
+              </a>
             </article>
           </Reveal>
         ))}
@@ -632,7 +640,7 @@ function Field({
   label: string; name: string; type?: string; textarea?: boolean; required?: boolean; placeholder?: string;
 }) {
   const cn =
-    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-fg/10 focus:border-accent";
+    "w-full border-b border-border bg-transparent py-4 font-display text-2xl uppercase tracking-wide outline-none transition-colors placeholder:text-muted focus:border-accent";
   return (
     <label className="block space-y-4">
       <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">{label}</span>
@@ -659,13 +667,19 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:items-end">
           <div className="flex gap-6">
-            <a href="#" className="hover:text-accent">LinkedIn</a>
-            <a href="#" className="hover:text-accent">Twitter</a>
-            <a href="#" className="hover:text-accent">Github</a>
-            <a href="#" className="hover:text-accent">Email</a>
+            <a
+              href="https://www.linkedin.com/company/setupr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-accent"
+            >
+              LinkedIn
+            </a>
+            <a href="mailto:ak@setupr.in" className="hover:text-accent">Email</a>
+            <a href="#contact" className="hover:text-accent">Contact</a>
           </div>
           <div>© {new Date().getFullYear()}, All systems nominal</div>
-          <div className="text-fg/40">Designed for the late-night console.</div>
+          <div className="text-muted">Designed for the late-night console.</div>
         </div>
       </div>
     </footer>
