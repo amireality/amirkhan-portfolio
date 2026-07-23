@@ -58,12 +58,12 @@ const services = [
 ];
 
 const sites = [
-  { name: "Setupr", one: "Agency site and lead engine.", stack: ["Next.js", "Tailwind", "Sanity"], href: "#" },
-  { name: "Altered", one: "D2C ethnic apparel storefront.", stack: ["Shopify", "Hydrogen", "GSAP"], href: "#" },
-  { name: "Alt", one: "On-prem LLM product page.", stack: ["Astro", "Tailwind", "MDX"], href: "#" },
-  { name: "Advisory Portal", one: "M&A advisory client portal.", stack: ["React", "TanStack", "Supabase"], href: "#" },
-  { name: "Founder Landing", one: "Personal brand landing for a solo operator.", stack: ["Framer", "Motion"], href: "#" },
-  { name: "Cohort Site", one: "Application site for a private cohort.", stack: ["Next.js", "Resend"], href: "#" },
+  { name: "Northrop Management", one: "Financial advisory company.", stack: ["Next.js", "Tailwind", "React"], href: "https://www.northropindia.com/", imgSrc: "/portfolio/northropindia.jpg" },
+  { name: "Luv 2 Care", one: "A Delhi based NGO to support women and children.", stack: ["Next.js", "Tailwind", "Sanity"], href: "https://luv2carefoundation.org/", imgSrc: "/portfolio/luv2care.jpg" },
+  { name: "Northrop Research", one: "A Delhi based NGO which works on environment and animals.", stack: ["React", "Supabase", "Tailwind"], href: "https://nrf.setupr.com/", imgSrc: "/portfolio/nrf.jpg" },
+  { name: "Setupr", one: "Founder. Full-stack IT and Financial services setup.", stack: ["Next.js", "Tailwind", "Sanity"], href: "https://setupr.com/", imgSrc: "/portfolio/setupr.jpg" },
+  { name: "Altered", one: "A pre-launch fashion clothing brand.", stack: ["Shopify", "Hydrogen", "GSAP"], href: "https://altered.co.in/", imgSrc: "/portfolio/altered.jpg" },
+  { name: "Amir Khan Portfolio", one: "The site you're on right now. Vibecoded from zero to production.", stack: ["React", "TanStack", "Tailwind"], href: "https://amir.setupr.com/", imgSrc: "/portfolio/portfolio.jpg" },
 ];
 
 const processSteps = [
@@ -413,17 +413,25 @@ function Ventures() {
   );
 }
 
-function BrowserFrame({ children }: { children?: ReactNode }) {
+function BrowserFrame({ src, href }: { src?: string; href?: string }) {
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-[#111]">
       <div className="flex items-center gap-1.5 border-b border-border bg-[#0c0c0c] px-3 py-2">
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
-        <span className="ml-3 rounded bg-black/40 px-2 py-0.5 font-mono text-[9px] text-muted">https://</span>
+        <span className="ml-3 max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded bg-black/40 px-2 py-0.5 font-mono text-[9px] text-muted">
+          {href || "https://"}
+        </span>
       </div>
-      <div className="aspect-video bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.15),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(251,191,36,0.08),transparent_60%)]">
-        {children}
+      <div className="relative aspect-video bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.15),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(251,191,36,0.08),transparent_60%)]">
+        {src ? (
+          <img
+            src={src}
+            alt="Site preview"
+            className="absolute inset-0 h-full w-full object-cover object-top opacity-80 transition-opacity group-hover:opacity-100"
+          />
+        ) : null}
       </div>
     </div>
   );
@@ -445,8 +453,8 @@ function Sites() {
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {sites.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
-            <a href={s.href} className="group block">
-              <BrowserFrame />
+            <a href={s.href} target="_blank" rel="noopener noreferrer" className="group block">
+              <BrowserFrame src={s.imgSrc} href={s.href} />
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h4 className="font-display text-2xl uppercase transition-colors group-hover:text-accent">{s.name}</h4>
