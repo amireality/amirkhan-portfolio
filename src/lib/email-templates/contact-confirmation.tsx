@@ -21,8 +21,8 @@ const Email = ({ name = 'there', message = '' }: Props) => (
   <EmailShell preview="Signal received. I'll be in touch inside 24 hours.">
     <Heading style={h1Style}>Thanks, {name}.</Heading>
     <Text style={textStyle}>
-      Your message reached the console. I read every inbound personally and
-      reply inside 24 hours, usually faster.
+      Thank you for writing. I read every inbound personally and reply inside
+      24 hours, usually faster.
     </Text>
     <Text style={textStyle}>
       If it's urgent, just reply directly to this email and it lands in my
